@@ -1,4 +1,4 @@
-package models
+package app
 
 type (
 	Breed struct {

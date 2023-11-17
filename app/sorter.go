@@ -1,14 +1,13 @@
-package sorter
+package app
 
 import (
-	"github.com/wandeder/breeds_of_cats_parser/app/models"
 	"sort"
 )
 
-func GetSortedBreeds(allBreeds models.CountryBreeds) (models.BreedsList, error) {
+func GetSortedBreeds(allBreeds CountryBreeds) (BreedsList, error) {
 	// Sorts breeds by the length of their names in ascending order
 
-	breedsList := models.BreedsList{}
+	breedsList := BreedsList{}
 	for country, breeds := range allBreeds {
 		if country == "" {
 			country = "Undefined"
@@ -18,7 +17,7 @@ func GetSortedBreeds(allBreeds models.CountryBreeds) (models.BreedsList, error) 
 			return len(breeds[i]) < len(breeds[j])
 		})
 
-		sortedBreeds := models.BreedsByCountry{
+		sortedBreeds := BreedsByCountry{
 			Country: country,
 			Breeds:  breeds,
 		}

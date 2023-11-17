@@ -1,14 +1,13 @@
-package parser
+package app
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/wandeder/breeds_of_cats_parser/app/models"
 	"io"
 	"net/http"
 )
 
-func fetchBreeds(link string, page int) (models.Breeds, error) {
+func fetchBreeds(link string, page int) (Breeds, error) {
 	url := fmt.Sprintf("%s?page=%d", link, page)
 	response, err := http.Get(url)
 	if err != nil {
@@ -16,7 +15,7 @@ func fetchBreeds(link string, page int) (models.Breeds, error) {
 	}
 	defer response.Body.Close()
 
-	var res models.GetBreedsResponse
+	var res GetBreedsResponse
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
@@ -31,7 +30,7 @@ func fetchBreeds(link string, page int) (models.Breeds, error) {
 	return breeds, nil
 }
 
-func parseBreedsRecursive(link string, page int, allBreeds models.CountryBreeds) error {
+func parseBreedsRecursive(link string, page int, allBreeds CountryBreeds) error {
 	breeds, err := fetchBreeds(link, page)
 	if err != nil {
 		return err
@@ -46,10 +45,10 @@ func parseBreedsRecursive(link string, page int, allBreeds models.CountryBreeds)
 	return parseBreedsRecursive(link, page+1, allBreeds)
 }
 
-func GetBreedsList(link string) (models.CountryBreeds, error) {
+func GetBreedsList(link string) (CountryBreeds, error) {
 	//Recursively downloads data about breeds
 
-	allBreeds := models.CountryBreeds{}
+	allBreeds := CountryBreeds{}
 	if err := parseBreedsRecursive(link, 1, allBreeds); err != nil {
 		return nil, err
 	}

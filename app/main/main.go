@@ -2,13 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/wandeder/breeds_of_cats_parser/app"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/wandeder/breeds_of_cats_parser/app/parser"
-	"github.com/wandeder/breeds_of_cats_parser/app/sorter"
-	"github.com/wandeder/breeds_of_cats_parser/app/writer"
 )
 
 func main() {
@@ -23,17 +21,17 @@ func main() {
 	}
 
 	//Recursively downloads data about breeds
-	unsortedBreeds, err := parser.GetBreedsList(link)
+	unsortedBreeds, err := app.GetBreedsList(link)
 	if err != nil {
 		fmt.Println("Error fetching breeds:", err)
 	}
 
 	// Sorts breeds by the length of their names in ascending order
-	sortedBreeds, err := sorter.GetSortedBreeds(unsortedBreeds)
+	sortedBreeds, err := app.GetSortedBreeds(unsortedBreeds)
 	if err != nil {
 		fmt.Println("Error sorting breeds:", err)
 	}
 
 	//Writes data to a JSON file
-	writer.WriteBreedsIntoJson(sortedBreeds)
+	app.WriteBreedsIntoJson(sortedBreeds)
 }

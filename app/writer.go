@@ -1,4 +1,4 @@
-package writer
+package app
 
 import (
 	"encoding/json"
@@ -6,11 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-
-	"github.com/wandeder/breeds_of_cats_parser/app/models"
 )
 
-func WriteBreedsIntoJson(allBreeds models.BreedsList) error {
+func WriteBreedsIntoJson(allBreeds BreedsList) error {
 	//Writes data to a JSON file
 
 	fileName := os.Getenv("FILE_NAME")
