@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
+	"github.com/wandeder/breeds_of_cats_parser/app/sorter"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/wandeder/breeds_of_cats_parser/app/parser"
-	"github.com/wandeder/breeds_of_cats_parser/app/sorter"
+	//"github.com/wandeder/breeds_of_cats_parser/app/sorter"
 	"github.com/wandeder/breeds_of_cats_parser/app/writer"
 )
 
 func main() {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
@@ -30,5 +30,4 @@ func main() {
 		fmt.Println("Error sorting breeds:", err)
 	}
 	writer.PrintAllBreeds(sortedBreeds)
-
 }
