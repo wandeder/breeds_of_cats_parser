@@ -13,6 +13,6 @@ This Go console application fetches a list of cat breeds from the Cat Fact API (
 ## Usage
 1. Clone the repository.
 2. Run the Go application by `go run app/main/main.go`
-3. Access the resulting JSON file at out/out.json.
+3. Access the resulting JSON file at out.json.
 
 Feel free to explore, contribute, and provide feedback!
