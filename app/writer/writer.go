@@ -13,7 +13,7 @@ import (
 func PrintAllBreeds(allBreeds models.BreedsList) error {
 	fileName := os.Getenv("FILE_NAME")
 	if fileName == "" {
-		log.Fatal("File name is empty")
+		log.Println("File name is empty")
 	}
 
 	file, err := json.MarshalIndent(&allBreeds, "", " ")

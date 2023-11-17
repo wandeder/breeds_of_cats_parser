@@ -5,13 +5,15 @@ import (
 	"sort"
 )
 
-func sortedByName(allBreeds models.CountryBreeds) models.BreedsList {
+func sortBreeds(allBreeds models.CountryBreeds) models.BreedsList {
 	breedsList := models.BreedsList{}
-	for country, breed := range allBreeds {
-		sort.Strings(breed)
+	for country, breeds := range allBreeds {
+		sort.Slice(breeds, func(i, j int) bool {
+			return len(breeds[i]) < len(breeds[j])
+		})
 		sortedBreeds := models.BreedsByCountry{
 			Country: country,
-			Breeds:  breed,
+			Breeds:  breeds,
 		}
 		breedsList = append(breedsList, sortedBreeds)
 	}
@@ -20,5 +22,5 @@ func sortedByName(allBreeds models.CountryBreeds) models.BreedsList {
 }
 
 func GetSortedBreeds(breeds models.CountryBreeds) (models.BreedsList, error) {
-	return sortedByName(breeds), nil
+	return sortBreeds(breeds), nil
 }
