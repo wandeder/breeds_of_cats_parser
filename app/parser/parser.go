@@ -47,6 +47,8 @@ func parseBreedsRecursive(link string, page int, allBreeds models.CountryBreeds)
 }
 
 func GetBreedsList(link string) (models.CountryBreeds, error) {
+	//Recursively downloads data about breeds
+
 	allBreeds := models.CountryBreeds{}
 	if err := parseBreedsRecursive(link, 1, allBreeds); err != nil {
 		return nil, err

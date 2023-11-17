@@ -16,17 +16,24 @@ func main() {
 	if err != nil {
 		log.Println("Error loading .env file")
 	}
+
 	link := os.Getenv("LINK")
 	if link == "" {
 		log.Println("Link is empty")
 	}
+
+	//Recursively downloads data about breeds
 	unsortedBreeds, err := parser.GetBreedsList(link)
 	if err != nil {
 		fmt.Println("Error fetching breeds:", err)
 	}
+
+	// Sorts breeds by the length of their names in ascending order
 	sortedBreeds, err := sorter.GetSortedBreeds(unsortedBreeds)
 	if err != nil {
 		fmt.Println("Error sorting breeds:", err)
 	}
-	writer.PrintAllBreeds(sortedBreeds)
+
+	//Writes data to a JSON file
+	writer.WriteBreedsIntoJson(sortedBreeds)
 }
