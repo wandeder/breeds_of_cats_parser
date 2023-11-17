@@ -16,7 +16,7 @@ func PrintAllBreeds(allBreeds models.BreedsList) error {
 		log.Println("File name is empty")
 	}
 
-	file, err := json.MarshalIndent(&allBreeds, "", " ")
+	file, err := json.MarshalIndent(&allBreeds, "", "  ")
 	if err != nil {
 		fmt.Println("Error Json serializing:", err)
 	}

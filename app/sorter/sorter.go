@@ -8,6 +8,9 @@ import (
 func sortBreeds(allBreeds models.CountryBreeds) models.BreedsList {
 	breedsList := models.BreedsList{}
 	for country, breeds := range allBreeds {
+		if country == "" {
+			country = "Undefined"
+		}
 		sort.Slice(breeds, func(i, j int) bool {
 			return len(breeds[i]) < len(breeds[j])
 		})
